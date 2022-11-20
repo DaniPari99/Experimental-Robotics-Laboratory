@@ -35,7 +35,7 @@ As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which
 ## Finite State Machine
 The following figure shows the states diagram of the Finite State Machine:
 
-![Diagramma senza titolo drawio-3](https://user-images.githubusercontent.com/62515616/202902152-24488445-a19b-4eb3-ab98-8950915526cd.png)
+![Diagramma senza titolo drawio-2-2](https://user-images.githubusercontent.com/62515616/202917876-32a0059d-9c03-42c1-b0eb-3e7a6f7bcb4e.png)
 
 As we can see we have 4 states:
 * ```WAIT```: this state is just executed at the beginning and it waits the map ontology to be loaded. As soon as the ontology is loaded, the transition **loaded** is trigguered.
