@@ -32,7 +32,7 @@ As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which
 ![Diagramma senza titolo drawio-5](https://user-images.githubusercontent.com/62515616/202917399-4889196b-1a46-4285-86f9-b455e57d0221.png)
 
 
-## Finite State Machine
+## States diagram
 The following figure shows the states diagram of the Finite State Machine:
 
 ![Diagramma senza titolo drawio-2-3](https://user-images.githubusercontent.com/62515616/202918060-40c54de6-60bf-485f-a580-f060d253ae70.png)
