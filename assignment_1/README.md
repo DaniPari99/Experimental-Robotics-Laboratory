@@ -38,4 +38,9 @@ As we can see we have 4 states:
 * ```DECIDE```: this state is executed in order to decide the next location to be visited. As soon as the next location is chosen, the transition **decided** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
 * ```VISIT```: this state is executed in order to visit the chosen location. As soon as the chosen location is visited, the transition **visited** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
 
-
+## Installation and running
+In order to run the application with the a launch file we need to install ```x-term``` with the following steps:
+```
+sudo apt-get update
+sudo apt-get -y install xterm
+```
