@@ -21,7 +21,7 @@ The following figure shows the software architecture of the assignment:
 
 ![Diagramma senza titolo drawio-4](https://user-images.githubusercontent.com/62515616/202909870-3cfa6d0d-1aaa-4e4e-987a-bf8973b7a9f3.png)
 
-As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which is not shown, because it is simply an helper interface usefull for the **assignment_fsm** node.
+As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which is not shown, because it is simply an helper interface usefull for the ```assignment_fsm``` node.
 * **assignment_fsm:** is the node which implements the Finite State Machine which drives the robot through the locations of the map according to the stimuli. It uses external function provided by the ```helper.py``` node.
 * **battery_state:** is the node which simulate the battery behaviour. The battery is recharged and run out infinitely. This state publishes on the topic ```/state/battery_low``` the state of the battery: it is a boolean which is **True** if the battery is low and **False** otherwise.
 * **controller:** is the server node which simulates the random motion of the robot while it is visiting a location. It only waste time waiting for doing something smarter in the future.
