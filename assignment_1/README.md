@@ -27,6 +27,11 @@ As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which
 * **controller:** is the server node which simulates the random motion of the robot while it is visiting a location. It only waste time waiting for doing something smarter in the future.
 * **armor:** is a server already done used by the ```assignment_fsm``` through the ```helper``` node for doing manipulations or queries on the ontology.
 
+## Temporal diagram
+
+![Diagramma senza titolo drawio-5](https://user-images.githubusercontent.com/62515616/202917399-4889196b-1a46-4285-86f9-b455e57d0221.png)
+
+
 ## Finite State Machine
 The following figure shows the states diagram of the Finite State Machine:
 
