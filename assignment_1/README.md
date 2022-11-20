@@ -17,11 +17,17 @@ i.e., the relations between C1, C2, R1, R2, R3 locations and the doors D1...D6.
 The purpose of the assignment is to develop a Finite State Machine based on the SMACH library which represents the robot motion in the environment by respecting the above specifications.
 
 ## Project structure
+The following figure shows the software architecture of the assignment:
 
 ![Diagramma senza titolo drawio-4](https://user-images.githubusercontent.com/62515616/202909870-3cfa6d0d-1aaa-4e4e-987a-bf8973b7a9f3.png)
 
+As we can see we have 4 nodes, but there is a fifth one: the **helper.py**, which is not shown, because it is simply an helper interface usefull for the **assignment_fsm.py** node.
+* **assignment_fsm.py:** is the node which implements the Finite State Machine which drives the robot through the locations of the map according to the stimuli. It uses external function provided by the **helper.py** node.
+* **battery_state:** is the node which simulate the battery behaviour which recharges and runs out infinitely. This state publishes on the topic '''/state/battery_low'''
+
+
 ## Finite State Machine
-The following figure shows the states diagram of the finite state machine node:
+The following figure shows the states diagram of the Finite State Machine:
 
 ![Diagramma senza titolo drawio-3](https://user-images.githubusercontent.com/62515616/202902152-24488445-a19b-4eb3-ab98-8950915526cd.png)
 
