@@ -28,7 +28,6 @@ As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which
 * **armor:** is a server already done used by the ```assignment_fsm``` through the ```helper``` node for doing manipulations or queries on the ontology.
 * ****
 
-
 ## Finite State Machine
 The following figure shows the states diagram of the Finite State Machine:
 
