@@ -44,3 +44,11 @@ In order to run the application with the a launch file we need to install ```x-t
 sudo apt-get update
 sudo apt-get -y install xterm
 ```
+Now run the launch file just typing on the terminal:
+```
+roslaunch assignment_1 assignment_1.launch
+```
+In order to run the application without a launch file you have to follow the following commands:
+```
+
+```
