@@ -53,5 +53,14 @@ roslaunch assignment_1 assignment_1.launch
 ### Without roslaunch
 In order to run the application without a launch file you have to follow the following commands:
 ```
-
+# open a terminal and run:
+roscore &
+# open a new terminal and run:
+rosrun armor execute it.emarolab.armor.ARMORMainService
+# open a new terminal and run:
+rosrun assignment_1 controller.py
+# open a new terminal and run:
+rosrun assignment_1 battery_state.py
+# open a new terminal and run:
+rosrun assignment_1 assignment_fsm.py
 ```
