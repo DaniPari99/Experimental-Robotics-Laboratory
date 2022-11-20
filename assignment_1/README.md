@@ -23,7 +23,7 @@ The following figure shows the software architecture of the assignment:
 
 As we can see we have 4 nodes, but there is a fifth one: the **helper.py**, which is not shown, because it is simply an helper interface usefull for the **assignment_fsm.py** node.
 * **assignment_fsm.py:** is the node which implements the Finite State Machine which drives the robot through the locations of the map according to the stimuli. It uses external function provided by the **helper.py** node.
-* **battery_state:** is the node which simulate the battery behaviour which recharges and runs out infinitely. This state publishes on the topic '''/state/battery_low'''
+* **battery_state:** is the node which simulate the battery behaviour which recharges and runs out infinitely. This state publishes on the topic ```/state/battery_low```
 
 
 ## Finite State Machine
