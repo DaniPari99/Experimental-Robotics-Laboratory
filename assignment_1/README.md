@@ -21,8 +21,8 @@ The following figure shows the states diagram of the finite state machine node:
 ![Diagramma senza titolo drawio-3](https://user-images.githubusercontent.com/62515616/202902152-24488445-a19b-4eb3-ab98-8950915526cd.png)
 
 As we can see we have 4 states:
-* WAIT
-* SLEEP
+* **WAIT**: this state is just executed at the beginning and it waits the map ontology to be loaded. As soon as the ontology is loaded, the transition **loaded** is trigguered
+* SLEEP:
 * DECIDE
 * VISIT
 
