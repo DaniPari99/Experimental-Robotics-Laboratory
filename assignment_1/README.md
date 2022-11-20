@@ -23,7 +23,9 @@ The following figure shows the software architecture of the assignment:
 
 As we can see we have 4 nodes, but there is a fifth one: the **helper.py**, which is not shown, because it is simply an helper interface usefull for the **assignment_fsm.py** node.
 * **assignment_fsm.py:** is the node which implements the Finite State Machine which drives the robot through the locations of the map according to the stimuli. It uses external function provided by the **helper.py** node.
-* **battery_state:** is the node which simulate the battery behaviour which recharges and runs out infinitely. This state publishes on the topic ```/state/battery_low```
+* **battery_state.py:** is the node which simulate the battery behaviour. The battery is recharged and run out infinitely. This state publishes on the topic ```/state/battery_low``` the state of the battery: it is a boolean which is **True** if the battery is low and **False** otherwise.
+* **controller.py:** is the server node which simulates the random motion of the robot while it is visiting a location.
+* ****
 
 
 ## Finite State Machine
@@ -32,9 +34,9 @@ The following figure shows the states diagram of the Finite State Machine:
 ![Diagramma senza titolo drawio-3](https://user-images.githubusercontent.com/62515616/202902152-24488445-a19b-4eb3-ab98-8950915526cd.png)
 
 As we can see we have 4 states:
-* **WAIT:** this state is just executed at the beginning and it waits the map ontology to be loaded. As soon as the ontology is loaded, the transition **loaded** is trigguered.
-* **SLEEP:** this state is executed in order to recharge the battery of the robot. As soon as the battery goes high, the transition **rested** is trigguered.
-* **DECIDE:** this state is executed in order to decide the next location to be visited. As soon as the next location is chosen, the transition **decided** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
-* **VISIT:** this state is executed in order to visit the chosen location. As soon as the chosen location is visited, the transition **visited** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
+* ```WAIT```: this state is just executed at the beginning and it waits the map ontology to be loaded. As soon as the ontology is loaded, the transition **loaded** is trigguered.
+* ```SLEEP```: this state is executed in order to recharge the battery of the robot. As soon as the battery goes high, the transition **rested** is trigguered.
+* ```DECIDE```: this state is executed in order to decide the next location to be visited. As soon as the next location is chosen, the transition **decided** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
+* ```VISIT```: this state is executed in order to visit the chosen location. As soon as the chosen location is visited, the transition **visited** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
 
 
