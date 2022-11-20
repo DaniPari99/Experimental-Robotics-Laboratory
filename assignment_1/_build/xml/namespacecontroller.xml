@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespacecontroller" kind="namespace" language="Python">
+    <compoundname>controller</compoundname>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespacecontroller_1a69440108a412893d13c50ca5601e3e55" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def controller.MoveRandomCallBack</definition>
+        <argsstring>(req)</argsstring>
+        <name>MoveRandomCallBack</name>
+        <param>
+          <type>req</type>
+          <defname>req</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function callback called whenever a client sends a request
+Args:
+    self
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/controller.py" line="22" column="1" bodyfile="scripts/controller.py" bodystart="22" bodyend="31"/>
+      </memberdef>
+      <memberdef kind="function" id="namespacecontroller_1ab99834e3e46bbb2d5aa31ca0c1b192e4" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def controller.my_controller_server</definition>
+        <argsstring>()</argsstring>
+        <name>my_controller_server</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function used for initializing the server &apos;my_controller_server&apos;
+Args:
+    self
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/controller.py" line="32" column="1" bodyfile="scripts/controller.py" bodystart="32" bodyend="42"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>.. module:: controller
+   :platform: Unix
+   :synopsis: Python module for simulating the random movemente of the robot in a location
+
+.. moduleauthor:: Daniele Martino Parisi
+
+Servers:
+    /controller
+
+The node simulate the random robot motion in the location reached by only waste time
+</verbatim> </para>
+    </detaileddescription>
+    <location file="scripts/controller.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

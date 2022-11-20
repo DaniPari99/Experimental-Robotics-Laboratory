@@ -1,0 +1,108 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classassignment__fsm_1_1_sleep" kind="class" language="Python" prot="public">
+    <compoundname>assignment_fsm::Sleep</compoundname>
+    <basecompoundref prot="public" virt="non-virtual">State</basecompoundref>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classassignment__fsm_1_1_sleep_1a7e238b2f2a1566976c3d3671918e5dc1" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>assignment_fsm.Sleep::_helper</definition>
+        <argsstring></argsstring>
+        <name>_helper</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="81" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="81" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classassignment__fsm_1_1_sleep_1ab252a7282ea696b7eb475b20e3a50ea2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def assignment_fsm.Sleep.__init__</definition>
+        <argsstring>(self, helper_interface)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>helper_interface</type>
+          <defname>helper_interface</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Constructor function of the Sleep class.
+Args:
+    self
+    helper_interface: object created by the class &apos;HelperInterface&apos;
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="74" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="74" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classassignment__fsm_1_1_sleep_1adfd893a888e32ba4cdce496836d99ce3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def assignment_fsm.Sleep.execute</definition>
+        <argsstring>(self, userdata)</argsstring>
+        <name>execute</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>userdata</type>
+          <defname>userdata</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function executed whenever the fsm goes in the &apos;Sleep&apos; state
+Args:
+    self
+    userdata: variable passed between the states of the fsm
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="87" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="87" bodyend="115"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <inheritancegraph>
+      <node id="2">
+        <label>State</label>
+      </node>
+      <node id="1">
+        <label>assignment_fsm.Sleep</label>
+        <link refid="classassignment__fsm_1_1_sleep"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </inheritancegraph>
+    <collaborationgraph>
+      <node id="2">
+        <label>State</label>
+      </node>
+      <node id="1">
+        <label>assignment_fsm.Sleep</label>
+        <link refid="classassignment__fsm_1_1_sleep"/>
+        <childnode refid="2" relation="public-inheritance">
+        </childnode>
+      </node>
+    </collaborationgraph>
+    <location file="scripts/assignment_fsm.py" line="73" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="73" bodyend="116"/>
+    <listofallmembers>
+      <member refid="classassignment__fsm_1_1_sleep_1ab252a7282ea696b7eb475b20e3a50ea2" prot="public" virt="non-virtual"><scope>assignment_fsm::Sleep</scope><name>__init__</name></member>
+      <member refid="classassignment__fsm_1_1_sleep_1a7e238b2f2a1566976c3d3671918e5dc1" prot="private" virt="non-virtual"><scope>assignment_fsm::Sleep</scope><name>_helper</name></member>
+      <member refid="classassignment__fsm_1_1_sleep_1adfd893a888e32ba4cdce496836d99ce3" prot="public" virt="non-virtual"><scope>assignment_fsm::Sleep</scope><name>execute</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>

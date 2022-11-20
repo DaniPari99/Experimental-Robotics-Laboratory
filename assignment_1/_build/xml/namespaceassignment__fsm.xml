@@ -1,0 +1,113 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="namespaceassignment__fsm" kind="namespace" language="Python">
+    <compoundname>assignment_fsm</compoundname>
+    <innerclass refid="classassignment__fsm_1_1_decide" prot="public">assignment_fsm::Decide</innerclass>
+    <innerclass refid="classassignment__fsm_1_1_sleep" prot="public">assignment_fsm::Sleep</innerclass>
+    <innerclass refid="classassignment__fsm_1_1_visit" prot="public">assignment_fsm::Visit</innerclass>
+    <innerclass refid="classassignment__fsm_1_1_wait" prot="public">assignment_fsm::Wait</innerclass>
+      <sectiondef kind="var">
+      <memberdef kind="variable" id="namespaceassignment__fsm_1a171149c99f267e726fc4aa6135d05145" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>string assignment_fsm::path</definition>
+        <argsstring></argsstring>
+        <name>path</name>
+        <initializer>=  dirname(realpath(__file__))</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="34" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="34" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceassignment__fsm_1af9f7f6fe91a0aeebec3d25df8bb7b961" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>assignment_fsm.client</definition>
+        <argsstring></argsstring>
+        <name>client</name>
+        <initializer>=  ArmorClient(&quot;test5&quot;,&quot;ontology5&quot;)</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="36" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="36" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceassignment__fsm_1ae73288754b310a378a67594c943a0c51" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int assignment_fsm.room_chosen</definition>
+        <argsstring></argsstring>
+        <name>room_chosen</name>
+        <initializer>=  0</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="39" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="39" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceassignment__fsm_1afe51b18fa95e1e235d445bea4942bab2" prot="public" static="no" mutable="no">
+        <type>float</type>
+        <definition>float assignment_fsm.LOOP_SLEEP_TIME</definition>
+        <argsstring></argsstring>
+        <name>LOOP_SLEEP_TIME</name>
+        <initializer>=  0.3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="42" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="42" bodyend="-1"/>
+      </memberdef>
+      <memberdef kind="variable" id="namespaceassignment__fsm_1a774f3fe893c8f7dba74e3a3173bb2659" prot="public" static="no" mutable="no">
+        <type>int</type>
+        <definition>int assignment_fsm.LOOP_STATE_TIME</definition>
+        <argsstring></argsstring>
+        <name>LOOP_STATE_TIME</name>
+        <initializer>=  3</initializer>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="43" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="43" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="func">
+      <memberdef kind="function" id="namespaceassignment__fsm_1ad1b04b8d55f0eeec5fa03e54c6b51d2f" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def assignment_fsm.main</definition>
+        <argsstring>()</argsstring>
+        <name>main</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/assignment_fsm.py" line="210" column="1" bodyfile="scripts/assignment_fsm.py" bodystart="210" bodyend="273"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+<para><verbatim>.. module:: assignment_fsm
+   :platform: Unix
+   :synopsis: Python module for the finite state machine
+
+.. moduleauthor:: Daniele Martino Parisi
+
+Clients:
+    /client: for connecting with Armor server
+
+The node implements the finite state machine which drives the robot through the locations of the map according to the stimulus
+</verbatim> </para>
+    </detaileddescription>
+    <location file="scripts/assignment_fsm.py" line="1" column="1"/>
+  </compounddef>
+</doxygen>

@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygenindex xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="index.xsd" version="1.8.17">
+  <compound refid="classassignment__fsm_1_1_decide" kind="class"><name>assignment_fsm::Decide</name>
+    <member refid="classassignment__fsm_1_1_decide_1a17869b7a96a7bb625e5a65e10d0165d0" kind="variable"><name>_helper</name></member>
+    <member refid="classassignment__fsm_1_1_decide_1a88bb85c633758ea8ecc01403441d179a" kind="function"><name>__init__</name></member>
+    <member refid="classassignment__fsm_1_1_decide_1aedacab82b10c4dd25c86356f91e91d7b" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="classhelper_1_1_helper_interface" kind="class"><name>helper::HelperInterface</name>
+    <member refid="classhelper_1_1_helper_interface_1a09edeb018a488e0024ede622754f3ad0" kind="variable"><name>mutex</name></member>
+    <member refid="classhelper_1_1_helper_interface_1a2cb847f351c248727ea75c15225b680f" kind="variable"><name>_battery_low</name></member>
+    <member refid="classhelper_1_1_helper_interface_1ad0fb8431a7e235cb129ce30ef279b127" kind="function"><name>__init__</name></member>
+    <member refid="classhelper_1_1_helper_interface_1a46855875f66abbcb56a73a84f1c147ce" kind="function"><name>reset_states</name></member>
+    <member refid="classhelper_1_1_helper_interface_1abd49edfcc00b28c562042b6c85984540" kind="function"><name>BatteryLowCallback</name></member>
+    <member refid="classhelper_1_1_helper_interface_1ac7975de6003d026157b347addb31a5a3" kind="function"><name>is_battery_low</name></member>
+    <member refid="classhelper_1_1_helper_interface_1a9c6b19b57558e6af50316a04ed2043a2" kind="function"><name>LoadOntology</name></member>
+    <member refid="classhelper_1_1_helper_interface_1ad699f2b0a579d715fdfb782dbacbab1c" kind="function"><name>MoveRobot</name></member>
+    <member refid="classhelper_1_1_helper_interface_1aeb7a0745dd3fb3352db608407ceb0abf" kind="function"><name>SetReachableLoc</name></member>
+    <member refid="classhelper_1_1_helper_interface_1a3e1ddab56f6b50ab1bc52657792bfa94" kind="function"><name>SetUrgentLoc</name></member>
+    <member refid="classhelper_1_1_helper_interface_1a9c3fa65adb6d697ff9a0f843b25476e8" kind="function"><name>SetCorridorLoc</name></member>
+    <member refid="classhelper_1_1_helper_interface_1a48ae84dfb66094cc84d659bf937afbb8" kind="function"><name>SetRoomLoc</name></member>
+    <member refid="classhelper_1_1_helper_interface_1aedf31680b13452ef9401e031b9b8a206" kind="function"><name>Choose</name></member>
+    <member refid="classhelper_1_1_helper_interface_1ae687d69aba65c6abba53539550f2a5cb" kind="function"><name>VisitLocation</name></member>
+    <member refid="classhelper_1_1_helper_interface_1a84ac25257ef9f3e0d3b410d4069fb351" kind="function"><name>controller_client</name></member>
+    <member refid="classhelper_1_1_helper_interface_1ad380cd106fb06454df0300e4bbce45c8" kind="function"><name>CheckRobotPosition</name></member>
+  </compound>
+  <compound refid="classrobot__states_1_1_robot_state" kind="class"><name>robot_states::RobotState</name>
+    <member refid="classrobot__states_1_1_robot_state_1a0894b6337f559998dbcab19f0343f20e" kind="variable"><name>_pose</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1ac293784a2205f9675f0ec49a3aa274a2" kind="variable"><name>_battery_low</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1a07dcafb11d018ed0754fecd03f089b56" kind="variable"><name>_randomness</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1a8612658c942b05d58aacdbcae69dc44a" kind="variable"><name>_random_battery_time</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1af915ba84f14daac9b0aaa87cec6e62b2" kind="function"><name>__init__</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1abfd8335889b8cb8aff179324e54bf326" kind="function"><name>set_pose</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1a76199309686fac776fe4427a8e549264" kind="function"><name>get_pose</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1ad7863501a879b48f6f2b7f057dfac0be" kind="function"><name>_is_battery_low</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1a146fe012c2e683a0525ae7bfcbfc1aac" kind="function"><name>_random_battery_notifier</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1adfca0b26aaf6e4aa84e2669205a311b2" kind="function"><name>_manual_battery_notifier</name></member>
+    <member refid="classrobot__states_1_1_robot_state_1ae5dcf6e3a89f04850bb0c6c9751cb190" kind="function"><name>_print_info</name></member>
+  </compound>
+  <compound refid="classassignment__fsm_1_1_sleep" kind="class"><name>assignment_fsm::Sleep</name>
+    <member refid="classassignment__fsm_1_1_sleep_1a7e238b2f2a1566976c3d3671918e5dc1" kind="variable"><name>_helper</name></member>
+    <member refid="classassignment__fsm_1_1_sleep_1ab252a7282ea696b7eb475b20e3a50ea2" kind="function"><name>__init__</name></member>
+    <member refid="classassignment__fsm_1_1_sleep_1adfd893a888e32ba4cdce496836d99ce3" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="classassignment__fsm_1_1_visit" kind="class"><name>assignment_fsm::Visit</name>
+    <member refid="classassignment__fsm_1_1_visit_1ace0ab3f9666eb3221bf4ae3eac370d14" kind="variable"><name>_helper</name></member>
+    <member refid="classassignment__fsm_1_1_visit_1a73908208c0bb6a6ef85a5b2bb35542c7" kind="function"><name>__init__</name></member>
+    <member refid="classassignment__fsm_1_1_visit_1a8b1b00269e62b1f2d0ea78ff46dd7a51" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="classassignment__fsm_1_1_wait" kind="class"><name>assignment_fsm::Wait</name>
+    <member refid="classassignment__fsm_1_1_wait_1a1e40b2b2865b50ed5e0a77d0ef5c6f56" kind="variable"><name>_helper</name></member>
+    <member refid="classassignment__fsm_1_1_wait_1ab482d6d30cb11e97cc952d2c3f700a9b" kind="function"><name>__init__</name></member>
+    <member refid="classassignment__fsm_1_1_wait_1a4bd1910d7bd2c8ae57736a7570a4a045" kind="function"><name>execute</name></member>
+  </compound>
+  <compound refid="namespaceassignment__1_1_1srv" kind="namespace"><name>assignment_1::srv</name>
+  </compound>
+  <compound refid="namespaceassignment__fsm" kind="namespace"><name>assignment_fsm</name>
+    <member refid="namespaceassignment__fsm_1a171149c99f267e726fc4aa6135d05145" kind="variable"><name>path</name></member>
+    <member refid="namespaceassignment__fsm_1af9f7f6fe91a0aeebec3d25df8bb7b961" kind="variable"><name>client</name></member>
+    <member refid="namespaceassignment__fsm_1ae73288754b310a378a67594c943a0c51" kind="variable"><name>room_chosen</name></member>
+    <member refid="namespaceassignment__fsm_1afe51b18fa95e1e235d445bea4942bab2" kind="variable"><name>LOOP_SLEEP_TIME</name></member>
+    <member refid="namespaceassignment__fsm_1a774f3fe893c8f7dba74e3a3173bb2659" kind="variable"><name>LOOP_STATE_TIME</name></member>
+    <member refid="namespaceassignment__fsm_1ad1b04b8d55f0eeec5fa03e54c6b51d2f" kind="function"><name>main</name></member>
+  </compound>
+  <compound refid="namespaceconf" kind="namespace"><name>conf</name>
+    <member refid="conf_8py_1a332f430461432dc465213f884a1e4967" kind="variable"><name>shell</name></member>
+    <member refid="conf_8py_1a45653c983098153b78e33600e39230eb" kind="variable"><name>project</name></member>
+    <member refid="conf_8py_1a33fa97cf51dcb25970fbf53f10159589" kind="variable"><name>copyright</name></member>
+    <member refid="conf_8py_1a637c239d256432248aa8d9f3ab0b8c52" kind="variable"><name>author</name></member>
+    <member refid="conf_8py_1ade15c5b54093b64d7c428ec19ca5b1cb" kind="variable"><name>version</name></member>
+    <member refid="conf_8py_1a325dc746d8bf05c54d26351c35a21d90" kind="variable"><name>release</name></member>
+    <member refid="conf_8py_1ae475e080536acb271a0a0efe56c3ba42" kind="variable"><name>extensions</name></member>
+    <member refid="conf_8py_1ae850ae634911b713e036b43894fdd525" kind="variable"><name>templates_path</name></member>
+    <member refid="conf_8py_1a1e0ba7f4cb1d50fa831f1236a77d60f6" kind="variable"><name>source_suffix</name></member>
+    <member refid="conf_8py_1ae22a29d94a222730836db739d6dbd71e" kind="variable"><name>master_doc</name></member>
+    <member refid="conf_8py_1ad76a2e6d7bfa880ebb4042c08e8b4e12" kind="variable"><name>language</name></member>
+    <member refid="conf_8py_1a7ad48fb6f3e9b129c02346ea0d3527c1" kind="variable"><name>exclude_patterns</name></member>
+    <member refid="conf_8py_1aea2e7ab4a244666c9b2e6231c9d53c2b" kind="variable"><name>pygments_style</name></member>
+    <member refid="conf_8py_1a3117edf4443d9b8c70a9f0f44294ba79" kind="variable"><name>highlight_language</name></member>
+    <member refid="conf_8py_1a6c3bfcc1a44546c1c75ce20f55bd0fd6" kind="variable"><name>html_theme</name></member>
+    <member refid="conf_8py_1af4fb5d8851ccaade135c2668dd3ced41" kind="variable"><name>html_static_path</name></member>
+    <member refid="conf_8py_1a8375f4f963de3ac8026eaa9beced9564" kind="variable"><name>intersphinx_mapping</name></member>
+    <member refid="conf_8py_1a8fe7f0d85f975f4ecba5cb6066959a09" kind="variable"><name>todo_include_todos</name></member>
+    <member refid="conf_8py_1acb47d2c0c2904fa7d36b63142533f383" kind="variable"><name>breathe_projects</name></member>
+    <member refid="conf_8py_1a6eba2d2c7ae923054b1c49e686ec89b9" kind="variable"><name>breathe_default_project</name></member>
+    <member refid="conf_8py_1a54585428ce84441199d9dfd7087e2243" kind="variable"><name>breathe_default_members</name></member>
+    <member refid="conf_8py_1aab7fddb2766ce3c430d8246fbfdbc7b1" kind="variable"><name>htmlhelp_basename</name></member>
+    <member refid="conf_8py_1a33619d385ad23765ac6ebb58bf82d43d" kind="variable"><name>latex_elements</name></member>
+    <member refid="conf_8py_1a7812f49970f3de0d15dd7b9b9a10e3a1" kind="variable"><name>latex_documents</name></member>
+    <member refid="conf_8py_1a85efc5fee48a26fa2d651f6eeb38fc2b" kind="variable"><name>man_pages</name></member>
+    <member refid="conf_8py_1a54b0faed214ac92017d5689efbb10672" kind="variable"><name>texinfo_documents</name></member>
+    <member refid="conf_8py_1a9e0d62d22b83ce34deb3f16ba63cedfe" kind="variable"><name>epub_title</name></member>
+    <member refid="conf_8py_1a75f94e80cc9b5ce60a0f0a8a096bad8e" kind="variable"><name>epub_exclude_files</name></member>
+  </compound>
+  <compound refid="namespacecontroller" kind="namespace"><name>controller</name>
+    <member refid="namespacecontroller_1a69440108a412893d13c50ca5601e3e55" kind="function"><name>MoveRandomCallBack</name></member>
+    <member refid="namespacecontroller_1ab99834e3e46bbb2d5aa31ca0c1b192e4" kind="function"><name>my_controller_server</name></member>
+  </compound>
+  <compound refid="namespacehelper" kind="namespace"><name>helper</name>
+    <member refid="namespacehelper_1aac866170d6c00ee542ff378222d674b5" kind="variable"><name>path</name></member>
+    <member refid="namespacehelper_1a565b29f546ba37ee6347438ef544b20f" kind="variable"><name>client</name></member>
+  </compound>
+  <compound refid="namespacerobot__states" kind="namespace"><name>robot_states</name>
+    <member refid="robot__states_8py_1a48a8ec21a21d6b2ecf92373b94ab8f1e" kind="variable"><name>LOG_TAG</name></member>
+  </compound>
+  <compound refid="index_8rst_8txt" kind="file"><name>index.rst.txt</name>
+    <member refid="index_8rst_8txt_1acfdd9f4c7a3cb06b9927f91ed8a36e23" kind="variable"><name>file</name></member>
+    <member refid="index_8rst_8txt_1a8af948c2d63ec30d5b63cb1d2824978d" kind="variable"><name>Nov</name></member>
+  </compound>
+  <compound refid="_c_make_lists_8txt" kind="file"><name>CMakeLists.txt</name>
+  </compound>
+  <compound refid="conf_8py" kind="file"><name>conf.py</name>
+  </compound>
+  <compound refid="assignment__fsm_8py" kind="file"><name>assignment_fsm.py</name>
+  </compound>
+  <compound refid="controller_8py" kind="file"><name>controller.py</name>
+  </compound>
+  <compound refid="helper_8py" kind="file"><name>helper.py</name>
+  </compound>
+  <compound refid="robot__states_8py" kind="file"><name>robot_states.py</name>
+  </compound>
+  <compound refid="dir_45b9293d3daaa82c00b5908f14ebb805" kind="dir"><name>_build</name>
+  </compound>
+  <compound refid="dir_02bdb4005edb5055ba0ef39c3e2b4a3d" kind="dir"><name>_build/html/_sources</name>
+  </compound>
+  <compound refid="dir_63358181ce567149a79d24bdd45b3e93" kind="dir"><name>_build/html</name>
+  </compound>
+  <compound refid="dir_53e6fa9553ac22a5646d2a2b2d7b97a1" kind="dir"><name>scripts</name>
+  </compound>
+</doxygenindex>

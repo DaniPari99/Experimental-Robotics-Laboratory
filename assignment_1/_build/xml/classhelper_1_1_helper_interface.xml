@@ -1,0 +1,383 @@
+<?xml version='1.0' encoding='UTF-8' standalone='no'?>
+<doxygen xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="compound.xsd" version="1.8.17">
+  <compounddef id="classhelper_1_1_helper_interface" kind="class" language="Python" prot="public">
+    <compoundname>helper::HelperInterface</compoundname>
+      <sectiondef kind="public-attrib">
+      <memberdef kind="variable" id="classhelper_1_1_helper_interface_1a09edeb018a488e0024ede622754f3ad0" prot="public" static="no" mutable="no">
+        <type></type>
+        <definition>helper.HelperInterface::mutex</definition>
+        <argsstring></argsstring>
+        <name>mutex</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="55" column="1" bodyfile="scripts/helper.py" bodystart="55" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="private-attrib">
+      <memberdef kind="variable" id="classhelper_1_1_helper_interface_1a2cb847f351c248727ea75c15225b680f" prot="private" static="no" mutable="no">
+        <type></type>
+        <definition>helper.HelperInterface::_battery_low</definition>
+        <argsstring></argsstring>
+        <name>_battery_low</name>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="69" column="1" bodyfile="scripts/helper.py" bodystart="69" bodyend="-1"/>
+      </memberdef>
+      </sectiondef>
+      <sectiondef kind="public-func">
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1ad0fb8431a7e235cb129ce30ef279b127" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.__init__</definition>
+        <argsstring>(self)</argsstring>
+        <name>__init__</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Constructor function of the HelperInterface class.
+Args:
+    self
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="46" column="1" bodyfile="scripts/helper.py" bodystart="46" bodyend="61"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1a46855875f66abbcb56a73a84f1c147ce" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.reset_states</definition>
+        <argsstring>(self)</argsstring>
+        <name>reset_states</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function to reset the battery state
+Args:
+    self
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="63" column="1" bodyfile="scripts/helper.py" bodystart="63" bodyend="70"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1abd49edfcc00b28c562042b6c85984540" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.BatteryLowCallback</definition>
+        <argsstring>(self, msg)</argsstring>
+        <name>BatteryLowCallback</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>msg</type>
+          <defname>msg</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function callback called whenever a new data is published in the topic battery_low by the node robot_states
+Args:
+    msg(Battery_state): the battery state
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="72" column="1" bodyfile="scripts/helper.py" bodystart="72" bodyend="86"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1ac7975de6003d026157b347addb31a5a3" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.is_battery_low</definition>
+        <argsstring>(self)</argsstring>
+        <name>is_battery_low</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the finite state machine node for knowing the current battery state
+Args:
+    self
+Returns:
+    _battery_low: The state of the battery
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="89" column="1" bodyfile="scripts/helper.py" bodystart="89" bodyend="98"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1a9c6b19b57558e6af50316a04ed2043a2" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.LoadOntology</definition>
+        <argsstring>(self)</argsstring>
+        <name>LoadOntology</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the finite state machine node for loading the map of the ontology
+Args:
+    self
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="100" column="1" bodyfile="scripts/helper.py" bodystart="100" bodyend="205"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1ad699f2b0a579d715fdfb782dbacbab1c" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.MoveRobot</definition>
+        <argsstring>(self, new_loc)</argsstring>
+        <name>MoveRobot</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>new_loc</type>
+          <defname>new_loc</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the finite state machine node for moving the robot from the current location to the chosen one
+Args:
+    self
+    new_loc: location chosen in the &apos;decide&apos; state of the finite state machine node
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="207" column="1" bodyfile="scripts/helper.py" bodystart="207" bodyend="249"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1aeb7a0745dd3fb3352db608407ceb0abf" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.SetReachableLoc</definition>
+        <argsstring>(self)</argsstring>
+        <name>SetReachableLoc</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the Choose function in order to set the reachable location by deleting the location &apos;E&apos;
+Args:
+    self
+Returns:
+    reachable_loc: the list of reachable locations
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="251" column="1" bodyfile="scripts/helper.py" bodystart="251" bodyend="277"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1a3e1ddab56f6b50ab1bc52657792bfa94" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.SetUrgentLoc</definition>
+        <argsstring>(self)</argsstring>
+        <name>SetUrgentLoc</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the Choose function in order to set the urgent locations by deleting the location &apos;E&apos; and the 2 corridors
+Args:
+    self
+Returns:
+    urgent_loc: the list of urgent locations
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="279" column="1" bodyfile="scripts/helper.py" bodystart="279" bodyend="309"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1a9c3fa65adb6d697ff9a0f843b25476e8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.SetCorridorLoc</definition>
+        <argsstring>(self)</argsstring>
+        <name>SetCorridorLoc</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the Choose function in order to set the corridors
+Args:
+    self
+Returns:
+    corridor_loc: the list of corridors
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="311" column="1" bodyfile="scripts/helper.py" bodystart="311" bodyend="325"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1a48ae84dfb66094cc84d659bf937afbb8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.SetRoomLoc</definition>
+        <argsstring>(self)</argsstring>
+        <name>SetRoomLoc</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the Choose function in order to set the Rooms
+Args:
+    self
+Returns:
+    room_loc: the list of rooms
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="327" column="1" bodyfile="scripts/helper.py" bodystart="327" bodyend="341"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1aedf31680b13452ef9401e031b9b8a206" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.Choose</definition>
+        <argsstring>(self)</argsstring>
+        <name>Choose</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the finite state machine to decide in what location go next
+Args:
+    self
+Returns:
+    possible_choices: the list of possible next locations
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="346" column="1" bodyfile="scripts/helper.py" bodystart="346" bodyend="393"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1ae687d69aba65c6abba53539550f2a5cb" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.VisitLocation</definition>
+        <argsstring>(self, room_chosen)</argsstring>
+        <name>VisitLocation</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <param>
+          <type>room_chosen</type>
+          <defname>room_chosen</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the finite state machine to visit the room chosen
+Args:
+    self
+    room_chosen: room chosen to be visited
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="395" column="1" bodyfile="scripts/helper.py" bodystart="395" bodyend="403"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1a84ac25257ef9f3e0d3b410d4069fb351" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.controller_client</definition>
+        <argsstring>(self)</argsstring>
+        <name>controller_client</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the visit location function in order to call the controller server for simulating the random motion of the robot in a room
+Args:
+    self
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="405" column="1" bodyfile="scripts/helper.py" bodystart="405" bodyend="418"/>
+      </memberdef>
+      <memberdef kind="function" id="classhelper_1_1_helper_interface_1ad380cd106fb06454df0300e4bbce45c8" prot="public" static="no" const="no" explicit="no" inline="no" virt="non-virtual">
+        <type>def</type>
+        <definition>def helper.HelperInterface.CheckRobotPosition</definition>
+        <argsstring>(self)</argsstring>
+        <name>CheckRobotPosition</name>
+        <param>
+          <type>self</type>
+          <defname>self</defname>
+        </param>
+        <briefdescription>
+        </briefdescription>
+        <detaileddescription>
+<para><verbatim>Function called by the finite state machine node in order to know in which location the robot is
+Args:
+    self
+Returns:
+    robot_position: the current robot position
+</verbatim> </para>
+        </detaileddescription>
+        <inbodydescription>
+        </inbodydescription>
+        <location file="scripts/helper.py" line="420" column="1" bodyfile="scripts/helper.py" bodystart="420" bodyend="435"/>
+      </memberdef>
+      </sectiondef>
+    <briefdescription>
+    </briefdescription>
+    <detaileddescription>
+    </detaileddescription>
+    <location file="scripts/helper.py" line="44" column="1" bodyfile="scripts/helper.py" bodystart="44" bodyend="435"/>
+    <listofallmembers>
+      <member refid="classhelper_1_1_helper_interface_1ad0fb8431a7e235cb129ce30ef279b127" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>__init__</name></member>
+      <member refid="classhelper_1_1_helper_interface_1a2cb847f351c248727ea75c15225b680f" prot="private" virt="non-virtual"><scope>helper::HelperInterface</scope><name>_battery_low</name></member>
+      <member refid="classhelper_1_1_helper_interface_1abd49edfcc00b28c562042b6c85984540" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>BatteryLowCallback</name></member>
+      <member refid="classhelper_1_1_helper_interface_1ad380cd106fb06454df0300e4bbce45c8" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>CheckRobotPosition</name></member>
+      <member refid="classhelper_1_1_helper_interface_1aedf31680b13452ef9401e031b9b8a206" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>Choose</name></member>
+      <member refid="classhelper_1_1_helper_interface_1a84ac25257ef9f3e0d3b410d4069fb351" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>controller_client</name></member>
+      <member refid="classhelper_1_1_helper_interface_1ac7975de6003d026157b347addb31a5a3" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>is_battery_low</name></member>
+      <member refid="classhelper_1_1_helper_interface_1a9c6b19b57558e6af50316a04ed2043a2" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>LoadOntology</name></member>
+      <member refid="classhelper_1_1_helper_interface_1ad699f2b0a579d715fdfb782dbacbab1c" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>MoveRobot</name></member>
+      <member refid="classhelper_1_1_helper_interface_1a09edeb018a488e0024ede622754f3ad0" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>mutex</name></member>
+      <member refid="classhelper_1_1_helper_interface_1a46855875f66abbcb56a73a84f1c147ce" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>reset_states</name></member>
+      <member refid="classhelper_1_1_helper_interface_1a9c3fa65adb6d697ff9a0f843b25476e8" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>SetCorridorLoc</name></member>
+      <member refid="classhelper_1_1_helper_interface_1aeb7a0745dd3fb3352db608407ceb0abf" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>SetReachableLoc</name></member>
+      <member refid="classhelper_1_1_helper_interface_1a48ae84dfb66094cc84d659bf937afbb8" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>SetRoomLoc</name></member>
+      <member refid="classhelper_1_1_helper_interface_1a3e1ddab56f6b50ab1bc52657792bfa94" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>SetUrgentLoc</name></member>
+      <member refid="classhelper_1_1_helper_interface_1ae687d69aba65c6abba53539550f2a5cb" prot="public" virt="non-virtual"><scope>helper::HelperInterface</scope><name>VisitLocation</name></member>
+    </listofallmembers>
+  </compounddef>
+</doxygen>
