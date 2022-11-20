@@ -26,7 +26,6 @@ As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which
 * **battery_state:** is the node which simulate the battery behaviour. The battery is recharged and run out infinitely. This state publishes on the topic ```/state/battery_low``` the state of the battery: it is a boolean which is **True** if the battery is low and **False** otherwise.
 * **controller:** is the server node which simulates the random motion of the robot while it is visiting a location. It only waste time waiting for doing something smarter in the future.
 * **armor:** is a server already done used by the ```assignment_fsm``` through the ```helper``` node for doing manipulations or queries on the ontology.
-* ****
 
 ## Finite State Machine
 The following figure shows the states diagram of the Finite State Machine:
