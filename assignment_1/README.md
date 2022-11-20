@@ -28,9 +28,11 @@ As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which
 * **armor:** is a server already done used by the ```assignment_fsm``` through the ```helper``` node for doing manipulations or queries on the ontology.
 
 ## Temporal diagram
+For sake of completeness the following figure shows the temporal diagram of the software architecture:
 
 ![Diagramma senza titolo drawio-5](https://user-images.githubusercontent.com/62515616/202917399-4889196b-1a46-4285-86f9-b455e57d0221.png)
 
+The diagram shows that the battery
 
 ## States diagram
 The following figure shows the states diagram of the Finite State Machine:
