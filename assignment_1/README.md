@@ -74,3 +74,6 @@ rosrun assignment_1 battery_state.py
 # open a new terminal and run:
 rosrun assignment_1 assignment_fsm.py
 ```
+## Video
+
+![assignment_1](https://user-images.githubusercontent.com/62515616/202920994-35aa40a1-32a7-4bac-9b23-3564ab02fe25.gif)
