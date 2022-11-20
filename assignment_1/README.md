@@ -75,5 +75,5 @@ rosrun assignment_1 battery_state.py
 rosrun assignment_1 assignment_fsm.py
 ```
 ## Video
+![assignment_1](https://user-images.githubusercontent.com/62515616/202922781-efcd5b18-887f-446e-ad65-9b20bd6469f0.gif)
 
-![assignment_1](https://user-images.githubusercontent.com/62515616/202920994-35aa40a1-32a7-4bac-9b23-3564ab02fe25.gif)
