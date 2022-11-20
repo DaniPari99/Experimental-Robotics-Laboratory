@@ -16,6 +16,7 @@ i.e., the relations between C1, C2, R1, R2, R3 locations and the doors D1...D6.
 
 Develop a Finite State Machine based on the SMACH library which represents the robot motion in the environment by respecting the above specifications.
 
-![Diagramma senza titolo drawio-2](https://user-images.githubusercontent.com/62515616/202902107-b782aa4a-aefa-46f6-82f1-bc1360fb440f.png)
+![Diagramma senza titolo drawio-3](https://user-images.githubusercontent.com/62515616/202902152-24488445-a19b-4eb3-ab98-8950915526cd.png)
+
 
 
