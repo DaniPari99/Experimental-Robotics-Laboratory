@@ -39,6 +39,8 @@ As we can see we have 4 states:
 * ```VISIT```: this state is executed in order to visit the chosen location. As soon as the chosen location is visited, the transition **visited** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
 
 ## Installation and running
+
+### With roslaunch
 In order to run the application with the a launch file we need to install ```x-term``` with the following steps:
 ```
 sudo apt-get update
@@ -48,6 +50,7 @@ Now run the launch file just typing on the terminal:
 ```
 roslaunch assignment_1 assignment_1.launch
 ```
+### Without roslaunch
 In order to run the application without a launch file you have to follow the following commands:
 ```
 
