@@ -16,7 +16,7 @@ i.e., the relations between C1, C2, R1, R2, R3 locations and the doors D1...D6.
 
 The purpose of the assignment is to develop a Finite State Machine based on the SMACH library which represents the robot motion in the environment by respecting the above specifications.
 
-## Project structure
+## Software architecture
 The following figure shows the software architecture of the assignment:
 
 ![Diagramma senza titolo drawio-4](https://user-images.githubusercontent.com/62515616/202909870-3cfa6d0d-1aaa-4e4e-987a-bf8973b7a9f3.png)
