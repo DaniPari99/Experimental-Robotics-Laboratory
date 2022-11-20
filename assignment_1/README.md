@@ -25,7 +25,7 @@ As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which
 * **assignment_fsm:** is the node which implements the Finite State Machine which drives the robot through the locations of the map according to the stimuli. It uses external function provided by the ```helper.py``` node.
 * **battery_state:** is the node which simulate the battery behaviour. The battery is recharged and run out infinitely. This state publishes on the topic ```/state/battery_low``` the state of the battery: it is a boolean which is **True** if the battery is low and **False** otherwise.
 * **controller:** is the server node which simulates the random motion of the robot while it is visiting a location. It only waste time waiting for doing something smarter in the future.
-* **armor:** is a server already done used by the ```assignment_fsm``` through the ```helper``` node for doing manipulations or queries on the ontology.
+* **armor:** is a server already implemented which is used by the ```assignment_fsm``` through the ```helper``` node for doing manipulations or queries on the ontology.
 
 ## Temporal diagram
 For sake of completeness the following figure shows the temporal diagram of the software architecture:
