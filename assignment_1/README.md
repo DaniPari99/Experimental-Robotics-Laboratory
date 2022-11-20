@@ -21,9 +21,9 @@ The following figure shows the states diagram of the finite state machine node:
 ![Diagramma senza titolo drawio-3](https://user-images.githubusercontent.com/62515616/202902152-24488445-a19b-4eb3-ab98-8950915526cd.png)
 
 As we can see we have 4 states:
-* **WAIT**: this state is just executed at the beginning and it waits the map ontology to be loaded. As soon as the ontology is loaded, the transition **loaded** is trigguered
-* SLEEP:
-* DECIDE
-* VISIT
+* **WAIT:** this state is just executed at the beginning and it waits the map ontology to be loaded. As soon as the ontology is loaded, the transition **loaded** is trigguered.
+* **SLEEP:** this state is executed in order to recharge the battery of the robot. As soon as the battery goes high, the transition **rested** is trigguered.
+* **DECIDE:** this state is executed in order to decide the next location to be visited. As soon as the next location is chosen, the transition **decided** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
+* **VISIT:** this state is executed in order to visit the chosen location. As soon as the chosen location is visited, the transition **visited** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
 
 
