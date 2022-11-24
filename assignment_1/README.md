@@ -75,5 +75,9 @@ rosrun assignment_1 battery_state.py
 rosrun assignment_1 assignment_fsm.py
 ```
 ## Video
+
+In the following gif animated video we can see 4 running terminals which show the overall assignment behaviour:
+
 ![assignment_1](https://user-images.githubusercontent.com/62515616/202922781-efcd5b18-887f-446e-ad65-9b20bd6469f0.gif)
 
+* **aRMOR server terminal**
