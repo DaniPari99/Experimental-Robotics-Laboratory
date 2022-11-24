@@ -80,4 +80,5 @@ In the following gif animated video we can see 4 running terminals which show th
 
 ![assignment_1](https://user-images.githubusercontent.com/62515616/202922781-efcd5b18-887f-446e-ad65-9b20bd6469f0.gif)
 
-* **aRMOR server terminal**
+* **aRMOR server terminal:** On the top left of the video we can see the aRMOR server in running waiting for accomplishing requests coming from other nodes.
+* ****
