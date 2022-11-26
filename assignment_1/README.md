@@ -78,8 +78,6 @@ rosrun assignment_1 assignment_fsm.py
 
 In the following gif animated video we can see 4 running terminals which show the overall assignment behaviour:
 
-![assignment_1](https://user-images.githubusercontent.com/62515616/202922781-efcd5b18-887f-446e-ad65-9b20bd6469f0.gif)
-
 ![assignment_1_completo_2](https://user-images.githubusercontent.com/62515616/204088174-198d4e54-d875-4983-88a7-5e696041c9e3.gif)
 
 
