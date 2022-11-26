@@ -81,4 +81,5 @@ In the following gif animated video we can see 4 running terminals which show th
 ![assignment_1](https://user-images.githubusercontent.com/62515616/202922781-efcd5b18-887f-446e-ad65-9b20bd6469f0.gif)
 
 * **aRMOR server terminal:** in the top left of the video we can see the aRMOR server in running waiting for requests coming from other nodes. As soon as a request is sent, we can see that aRMOR will accomplish it. Whenever a manipulation on the ontology is requested or whenever a query request is done, a request to aRMOR is sent
-* **Controller server terminal:** in the top right of the video we can see the controller server waiting for accomplishing the visiting
+* **Controller server terminal:** in the top right of the video we can see the controller server waiting for accomplishing the visiting routine in which basically it wastes time.
+* **Finite State Machine terminal:** in the bottom left we can see the Finite State Machine node running: 
