@@ -98,9 +98,16 @@ Because of the urgency threshold is set to the default value of 7 seconds and th
 
 ### System’s features
 
-Then it is assumed that the movement from a location to an other one is an atomic action, so the robot can be only in a location, the correct position in that location is unknown. so it is assumed that the robot has not a particular current position in a room, but it is supposed that the robot is in that room.
 
-I also assumed that the 'VISIT' action is just a waste of time.
+
+### System’s limitations
+
+* It is assumed that the movement from a location to an other one is an atomic action, so the robot can be only in a location, the correct position in that location is unknown. so it is assumed that the robot has not a particular current position in a room, but it is supposed that the robot is in that room.
+* I also assumed that the 'VISIT' action is just a waste of time.
+
+
+### Possible technical Improvements
+
 
 
 
