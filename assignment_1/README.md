@@ -103,11 +103,13 @@ Because of the urgency threshold is set to the default value of 7 seconds and th
 ### System’s limitations
 
 * It is assumed that the movement from a location to an other one is an atomic action, so the robot can be only in a location, the correct position in that location is unknown. so it is assumed that the robot has not a particular current position in a room, but it is supposed that the robot is in that room.
-* I also assumed that the 'VISIT' action is just a waste of time.
+* It is also assumed that the 'VISIT' action is just a waste of time.
 
 
 ### Possible technical Improvements
 
+* The system can be improved by implementing a Planner node and a controller node which work cooperatively for simulating the continuous motion of the robot along the locations
+* Also for improving the VISIT state I can implement the 2 cooperative node: planner and controller
 
 
 
