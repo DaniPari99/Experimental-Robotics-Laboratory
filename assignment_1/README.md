@@ -91,9 +91,17 @@ i.e., the relations between C1, C2, R1, R2, R3 locations and the doors D1...D6.
 
 In order for the reasoner to always discover a consensual ontology to operate with, the environment that is used and initialized must be consistent with the real one.
 Additionally, it is also assumed that E, C1, and C2 are all connected. The robot can correctly carry out its monitoring policy in this way.
+
+The robot starts in the recharging location 'E'. When the battery is fully recharged the robot moves randomly along the locations. So it means that it checks among the reachable locations if there are urgent ones. If there are not urgent locations a corridor is chosen randomly, but if there are not corridors among the reachable locations a random location is chosen.
+
+Because of the urgency threshold is set to the default value of 7 seconds and that the battery change behaviour is low and high randomly after an amount of seconds included in the range [15, 40], the robot will not do the transition between C1 and C2. But this does not mean that one of the 2 corridors will never be reached, because once the robot comes back to 'E' for recharging it can randomly chosen one of the 2 corridors. So. I Think that it can be a reasonable solution, because all the locations can be visited.
+
+### System’s features
+
 Then it is assumed that the movement from a location to an other one is an atomic action, so the robot can be only in a location, the correct position in that location is unknown. so it is assumed that the robot has not a particular current position in a room, but it is supposed that the robot is in that room.
 
 I also assumed that the 'VISIT' action is just a waste of time.
 
-Because of the urgency threshold is set to the default value of 7 seconds and that the battery change behaviour is low and high randomly after an amount of seconds included in the range [15, 40], the robot will not do the transition between C1 and C2. But this does not mean that one of the 2 corridors will never be reached, because once the robot comes back to 'E' for recharging it can randomly chosen one of the 2 corridors. So. I Think that it can be a reasonable solution, because all the locations can be visited.
+
+
 
