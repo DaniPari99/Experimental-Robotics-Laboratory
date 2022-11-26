@@ -95,4 +95,5 @@ Then it is assumed that the movement from a location to an other one is an atomi
 
 I also assumed that the 'VISIT' action is just a waste of time.
 
-Because of the urgency threshold is set to the default value of 7 seconds and that the battery change behaviour is low and high randomly after an amount of seconds included in the range [15, 40]
+Because of the urgency threshold is set to the default value of 7 seconds and that the battery change behaviour is low and high randomly after an amount of seconds included in the range [15, 40], the robot will not do the transition between C1 and C2. But this does not mean that one of the 2 corridors will never be reached, because once the robot comes back to 'E' for recharging it can randomly chosen one of the 2 corridors. So. I Think that it can be a reasonable solution, because all the locations can be visited.
+
