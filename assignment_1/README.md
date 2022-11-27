@@ -67,7 +67,7 @@ def disj_all_inds(self,ind_list):
             raise ArmorServiceInternalError(res.error_description, res.exit_code)
 ```
 
-### With roslaunch
+### Running with roslaunch
 In order to run the application with a launch file you need to install ```x-term``` with the following steps:
 ```
 sudo apt-get update
@@ -77,7 +77,7 @@ Finally you can run the launch file just typing on the terminal:
 ```
 roslaunch assignment_1 assignment_1.launch
 ```
-### Without roslaunch
+### Running Without roslaunch
 In order to run the application without a launch file you have to follow the following commands:
 ```
 # open a terminal and run:
