@@ -6,7 +6,7 @@ Parisi Daniele Martino 4670964
 
 [code documentation](https://danipari99.github.io/Experimental-Robotics-Laboratory/)
 
-The assignment involves a robot deployed in a indoor environment for surveillance purposes. The robot’s objective is to visit the different locations and stay there for some times.
+The assignment involves a robot deployed in an indoor environment for surveillance purposes. The robot’s objective is to visit the different locations and stay there for some times.
 
 The purpose of the assignment is to develop a Finite State Machine based on the SMACH library which represents the robot motion in the environment by respecting the above specifications.
 
