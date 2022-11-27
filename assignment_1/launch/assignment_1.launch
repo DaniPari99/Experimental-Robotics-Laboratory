@@ -1,9 +1,0 @@
-<?xml version="1.0"?>
-
-<launch>
-  
-    <node pkg="armor" type="execute" name="armor_service" args="it.emarolab.armor.ARMORMainService"/>
-    <node pkg="assignment_1" type="assignment_fsm.py" name="assignment_fsm" output="screen" required="true" launch-prefix="xterm -fa 'Monospace' -fs 12 -e"/>
-    <node pkg="assignment_1" type="controller.py" name="controller" output="screen" required="true" launch-prefix="xterm -fa 'Monospace' -fs 12 -e"/>
-    <node pkg="assignment_1" type="battery_state.py" name="battery_state" output="screen" required="true" launch-prefix="xterm -fa 'Monospace' -fs 12 -e"/>
-</launch>
