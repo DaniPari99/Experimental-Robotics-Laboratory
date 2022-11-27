@@ -48,6 +48,10 @@ In order to run the application with the a launch file we need to install ```x-t
 sudo apt-get update
 sudo apt-get -y install xterm
 ```
+You need to have aRMOR package cloned in your SRC folder of you workspace, if youy don't have follow the steps in the following link:
+
+[Click me to go to Google!](https://github.com/EmaroLab/armor/issues/7)
+
 Now run the launch file just typing on the terminal:
 ```
 roslaunch assignment_1 assignment_1.launch
@@ -94,10 +98,7 @@ Additionally, it is also assumed that E, C1, and C2 are all connected. The robot
 
 The robot starts in the recharging location 'E'. When the battery is fully recharged the robot moves randomly along the locations. So it means that it checks among the reachable locations if there are urgent ones. If there are not urgent locations a corridor is chosen randomly, but if there are not corridors among the reachable locations a random location is chosen.
 
-Because of the urgency threshold is set to the default value of 7 seconds and that the battery change behaviour is low and high randomly after an amount of seconds included in the range [15, 40], the robot will not do the transition between C1 and C2. But this does not mean that one of the 2 corridors will never be reached, because once the robot comes back to 'E' for recharging it can randomly chosen one of the 2 corridors. So. I Think that it can be a reasonable solution, because all the locations can be visited.
-
-### System’s features
-
+Because of the urgency threshold is set to the default value of 7 seconds and that the battery change behaviour is low and high randomly after an amount of seconds included in the range [15, 40], the robot will not do the movement from C1 to C2 or viceversa. But this does not mean that one of the 2 corridors will never be reached, because once the robot comes back to 'E' for recharging it can randomly chosen one of the 2 corridors. So I Think that it can be a reasonable solution, because all the locations can be visited.
 
 
 ### System’s limitations
@@ -105,12 +106,13 @@ Because of the urgency threshold is set to the default value of 7 seconds and th
 * It is assumed that the movement from a location to an other one is an atomic action, so the robot can be only in a location, the correct position in that location is unknown. so it is assumed that the robot has not a particular current position in a room, but it is supposed that the robot is in that room.
 * It is also assumed that the 'VISIT' action is just a waste of time.
 
+* Robot cannot do the transition between the 2 corridors
 
 ### Possible technical Improvements
 
 * The system can be improved by implementing a Planner node and a controller node which work cooperatively for simulating the continuous motion of the robot along the locations
 * Also for improving the VISIT state I can implement the 2 cooperative node: planner and controller
 
-
+* The third limitation can be solved by increasing the urgency threshold
 
 
