@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="writer-html4" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>scripts.helper &mdash; assignment_1 1.0 documentation</title><link rel="stylesheet" href="../../_static/css/theme.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../../_static/graphviz.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+        <script type="text/javascript" src="../../_static/jquery.js"></script>
+        <script type="text/javascript" src="../../_static/underscore.js"></script>
+        <script type="text/javascript" src="../../_static/doctools.js"></script>
+        <script type="text/javascript" src="../../_static/language_data.js"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../../index.html" class="icon icon-home"> assignment_1
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">assignment_1</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">Module code</a></li>
+      <li class="breadcrumb-item active">scripts.helper</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for scripts.helper</h1><div class="highlight"><pre>
+<span></span><span class="ch">#! /usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">.. module:: helper</span>
+<span class="sd">   :platform: Unix</span>
+<span class="sd">   :synopsis: Python module for helping the finite stete machine module</span>
+
+<span class="sd">.. moduleauthor:: Daniele Martino Parisi</span>
+
+<span class="sd">Subscribes to:</span>
+<span class="sd">    &#39;state/battery_low&#39;: where battery_state publishes the battery state</span>
+
+<span class="sd">Clients:</span>
+<span class="sd">        :&#39;controller&#39;: for implementing the visit of a room</span>
+
+<span class="sd">        :&#39;client&#39;: for connecting with Armor server</span>
+
+<span class="sd">The node implements a class which contains a lot of functions that can help the finite state machine node in performing its task.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">import</span> <span class="nn">rospy</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">armor_api.armor_client</span> <span class="kn">import</span> <span class="n">ArmorClient</span>
+<span class="kn">from</span> <span class="nn">os.path</span> <span class="kn">import</span> <span class="n">dirname</span><span class="p">,</span> <span class="n">realpath</span>
+<span class="kn">from</span> <span class="nn">std_msgs.msg</span> <span class="kn">import</span> <span class="n">Bool</span>
+<span class="kn">from</span> <span class="nn">assignment_1.srv</span> <span class="kn">import</span> <span class="o">*</span>
+<span class="kn">from</span> <span class="nn">threading</span> <span class="kn">import</span> <span class="n">Lock</span>
+<span class="kn">from</span> <span class="nn">actionlib</span> <span class="kn">import</span> <span class="n">SimpleActionClient</span>
+
+<span class="n">path</span> <span class="o">=</span> <span class="n">dirname</span><span class="p">(</span><span class="n">realpath</span><span class="p">(</span><span class="vm">__file__</span><span class="p">))</span>
+<span class="n">path</span> <span class="o">=</span> <span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;/../&quot;</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">ArmorClient</span><span class="p">(</span><span class="s2">&quot;test5&quot;</span><span class="p">,</span><span class="s2">&quot;ontology5&quot;</span><span class="p">)</span>
+
+<span class="c1"># Initializing with buffered manipulation and reasoning</span>
+<span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">load_ref_from_file</span><span class="p">(</span><span class="n">path</span> <span class="o">+</span> <span class="s2">&quot;topological_map.owl&quot;</span><span class="p">,</span> <span class="s2">&quot;http://bnc/exp-rob-lab/2022-23&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="s2">&quot;PELLET&quot;</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+
+<div class="viewcode-block" id="HelperInterface"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface">[docs]</a><span class="k">class</span> <span class="nc">HelperInterface</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    class for implementing the helper interface.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+<div class="viewcode-block" id="HelperInterface.__init__"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.__init__">[docs]</a>    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+         <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">         Constructor function of the HelperInterface class.</span>
+
+<span class="sd">         Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">         Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">         &quot;&quot;&quot;</span>
+         <span class="c1"># Create a shared mutex to synchronize action clients and subscribers.</span>
+         <span class="c1"># Note that, based on different assumptions, further optimization can be done to make the different threads</span>
+         <span class="c1"># blocking for a less amount of time in the same mutex.</span>
+         <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span> <span class="o">=</span> <span class="n">Lock</span><span class="p">()</span>
+
+         <span class="bp">self</span><span class="o">.</span><span class="n">reset_states</span><span class="p">()</span>
+
+         <span class="c1"># Define the callback associated with the battery low ROS subscribers.</span>
+         <span class="n">rospy</span><span class="o">.</span><span class="n">Subscriber</span><span class="p">(</span><span class="s1">&#39;state/battery_low&#39;</span><span class="p">,</span> <span class="n">Bool</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">BatteryLowCallback</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HelperInterface.reset_states"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.reset_states">[docs]</a>    <span class="k">def</span> <span class="nf">reset_states</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function to reset the battery state.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_battery_low</span> <span class="o">=</span> <span class="kc">True</span></div>
+
+<div class="viewcode-block" id="HelperInterface.BatteryLowCallback"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.BatteryLowCallback">[docs]</a>    <span class="k">def</span> <span class="nf">BatteryLowCallback</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">msg</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function callback called whenever a new data is published in the topic battery_low by the node battery_state.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            msg(Bool): the battery state</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># Acquire the mutex to assure the synchronization with the other subscribers and action clients (this assure data consistency).</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span><span class="o">.</span><span class="n">acquire</span><span class="p">()</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="c1"># Get the battery level and set the relative state variable encoded in this class.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_battery_low</span> <span class="o">=</span> <span class="n">msg</span><span class="o">.</span><span class="n">data</span>
+        <span class="k">finally</span><span class="p">:</span>
+            <span class="c1"># Release the mutex to eventually unblock the other subscribers or action servers that are waiting.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">mutex</span><span class="o">.</span><span class="n">release</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HelperInterface.is_battery_low"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.is_battery_low">[docs]</a>    <span class="k">def</span> <span class="nf">is_battery_low</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the finite state machine node to get the battery state that concerns the battery level.</span>
+<span class="sd">        The returning value will be `True` if the battery is low, `False` otherwise.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            _battery_low(Bool): The state of the battery</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_battery_low</span></div>
+
+<div class="viewcode-block" id="HelperInterface.LoadOntology"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.LoadOntology">[docs]</a>    <span class="k">def</span> <span class="nf">LoadOntology</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the finite state machine node for loading the map of the ontology.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">mount_on_ref</span><span class="p">()</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">set_log_to_terminal</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Add all our individuals</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;R1&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCATION&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added R1 to LOCATION&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;R2&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCATION&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added R2 to LOCATION&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;R3&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCATION&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added R3 to LOCATION&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;R4&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCATION&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added R4 to LOCATION&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCATION&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added C1 to LOCATION&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCATION&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added C2 to LOCATION&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;LOCATION&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added E to LOCATION&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;D1&quot;</span><span class="p">,</span> <span class="s2">&quot;DOOR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added D1 to DOOR&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;D2&quot;</span><span class="p">,</span> <span class="s2">&quot;DOOR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added D2 to DOOR&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;D3&quot;</span><span class="p">,</span> <span class="s2">&quot;DOOR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added D3 to DOOR&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;D4&quot;</span><span class="p">,</span> <span class="s2">&quot;DOOR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added D4 to DOOR&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;D5&quot;</span><span class="p">,</span> <span class="s2">&quot;DOOR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added D5 to DOOR&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;D6&quot;</span><span class="p">,</span> <span class="s2">&quot;DOOR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added D6 to DOOR&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_ind_to_class</span><span class="p">(</span><span class="s2">&quot;D7&quot;</span><span class="p">,</span> <span class="s2">&quot;DOOR&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Added D7 to DOOR&quot;</span><span class="p">)</span>
+
+        <span class="n">ind_list</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;R1&quot;</span><span class="p">,</span> <span class="s2">&quot;R2&quot;</span><span class="p">,</span> <span class="s2">&quot;R3&quot;</span><span class="p">,</span> <span class="s2">&quot;R4&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;D1&quot;</span><span class="p">,</span> <span class="s2">&quot;D2&quot;</span><span class="p">,</span> <span class="s2">&quot;D3&quot;</span><span class="p">,</span> <span class="s2">&quot;D4&quot;</span><span class="p">,</span> <span class="s2">&quot;D5&quot;</span><span class="p">,</span> <span class="s2">&quot;D6&quot;</span><span class="p">,</span> <span class="s2">&quot;D7&quot;</span><span class="p">]</span>
+
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">disj_all_inds</span><span class="p">(</span><span class="n">ind_list</span><span class="p">)</span>
+
+        <span class="c1"># Disjoint of the individuals of the classes</span>
+        <span class="c1">#client.manipulation.disj_inds_of_class(&quot;LOCATION&quot;)</span>
+        <span class="c1">#client.manipulation.disj_inds_of_class(&quot;DOOR&quot;)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;all individuals are disjointed&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Add properties to objects</span>
+        <span class="c1"># Distinction between rooms and corridors</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;R1&quot;</span><span class="p">,</span> <span class="s2">&quot;D1&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;R2&quot;</span><span class="p">,</span> <span class="s2">&quot;D2&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;R3&quot;</span><span class="p">,</span> <span class="s2">&quot;D3&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;R4&quot;</span><span class="p">,</span> <span class="s2">&quot;D4&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;D1&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;D2&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;D5&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;D7&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;D3&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;D4&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;D5&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s2">&quot;D6&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;D6&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;hasDoor&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;D7&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Connections between locations</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;connectedTo&quot;</span><span class="p">,</span> <span class="s2">&quot;R1&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;connectedTo&quot;</span><span class="p">,</span> <span class="s2">&quot;R2&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;connectedTo&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;connectedTo&quot;</span><span class="p">,</span> <span class="s2">&quot;R3&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;connectedTo&quot;</span><span class="p">,</span> <span class="s2">&quot;R4&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;connectedTo&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;connectedTo&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize the robot position</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_objectprop_to_ind</span><span class="p">(</span><span class="s2">&quot;isIn&quot;</span><span class="p">,</span> <span class="s2">&quot;Robot1&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Initialize room and time stamps</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_dataprop_to_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="s2">&quot;R1&quot;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R1 visited&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_dataprop_to_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="s2">&quot;R2&quot;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2 visited&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_dataprop_to_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="s2">&quot;R3&quot;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R3 visited&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_dataprop_to_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="s2">&quot;R4&quot;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R4 visited&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_dataprop_to_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="s2">&quot;C1&quot;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C1 visited&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_dataprop_to_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="s2">&quot;C2&quot;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;C2 visited&quot;</span><span class="p">)</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">add_dataprop_to_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="s2">&quot;E&quot;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())))</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;E visited&quot;</span><span class="p">)</span>
+
+        <span class="c1"># Update the reasoner</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">apply_buffered_changes</span><span class="p">()</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">sync_buffered_reasoner</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HelperInterface.MoveRobot"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.MoveRobot">[docs]</a>    <span class="k">def</span> <span class="nf">MoveRobot</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_loc</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the finite state machine node for moving the robot from the current location to the chosen one.</span>
+<span class="sd">        In this function are updated the timestamps in order to query correctly the urgent location for the next queries</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            new_loc(string): location chosen in the &#39;decide&#39; state of the finite state machine node</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># save the prev position of the robot</span>
+        <span class="n">old_loc</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">objectprop_b2_ind</span><span class="p">(</span><span class="s2">&quot;isIn&quot;</span><span class="p">,</span> <span class="s2">&quot;Robot1&quot;</span><span class="p">)</span>
+        <span class="c1"># delete the useless characters</span>
+        <span class="n">old_loc</span> <span class="o">=</span> <span class="n">old_loc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">old_loc</span> <span class="o">=</span> <span class="n">old_loc</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">old_loc</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">old_loc</span> <span class="o">=</span> <span class="n">old_loc</span><span class="p">[</span><span class="mi">32</span><span class="p">:]</span>
+
+        <span class="c1"># query for retrieving the previous &#39;now&#39;</span>
+        <span class="n">robot_prev_now</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">dataprop_b2_ind</span><span class="p">(</span><span class="s2">&quot;now&quot;</span><span class="p">,</span> <span class="s2">&quot;Robot1&quot;</span><span class="p">)</span>
+
+        <span class="c1"># delete the useless characters</span>
+        <span class="n">robot_prev_now</span> <span class="o">=</span> <span class="n">robot_prev_now</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">robot_prev_now</span> <span class="o">=</span> <span class="n">robot_prev_now</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">robot_prev_now</span><span class="p">)</span><span class="o">-</span><span class="mi">11</span><span class="p">]</span>
+        <span class="n">robot_prev_now</span> <span class="o">=</span> <span class="n">robot_prev_now</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># query for retrieving the previous &#39;visitedAt&#39;</span>
+        <span class="n">loc_prev_visitedAt</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">dataprop_b2_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="n">new_loc</span><span class="p">)</span>
+
+        <span class="c1"># delete the useless characters</span>
+        <span class="n">loc_prev_visitedAt</span> <span class="o">=</span> <span class="n">loc_prev_visitedAt</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">loc_prev_visitedAt</span> <span class="o">=</span> <span class="n">loc_prev_visitedAt</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">loc_prev_visitedAt</span><span class="p">)</span><span class="o">-</span><span class="mi">11</span><span class="p">]</span>
+        <span class="n">loc_prev_visitedAt</span> <span class="o">=</span> <span class="n">loc_prev_visitedAt</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+        <span class="c1"># manipulation for changing the current location of the robot with the new one</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">replace_objectprop_b2_ind</span><span class="p">(</span><span class="s2">&quot;isIn&quot;</span><span class="p">,</span> <span class="s2">&quot;Robot1&quot;</span><span class="p">,</span> <span class="n">new_loc</span><span class="p">,</span> <span class="n">old_loc</span><span class="p">)</span>
+
+        <span class="c1"># manipulation for changing the previous timestamp &#39;now&#39; with the new one</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">replace_dataprop_b2_ind</span><span class="p">(</span><span class="s2">&quot;now&quot;</span><span class="p">,</span> <span class="s2">&quot;Robot1&quot;</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())),</span> <span class="n">robot_prev_now</span><span class="p">)</span>
+
+        <span class="c1"># manipulation for changing the previous timestamp visitedAt with the new one</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">manipulation</span><span class="o">.</span><span class="n">replace_dataprop_b2_ind</span><span class="p">(</span><span class="s2">&quot;visitedAt&quot;</span><span class="p">,</span> <span class="n">new_loc</span><span class="p">,</span> <span class="s1">&#39;Long&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">())),</span> <span class="n">loc_prev_visitedAt</span><span class="p">)</span>
+
+        <span class="c1"># Update the reasoner after the manipulations</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">apply_buffered_changes</span><span class="p">()</span>
+        <span class="n">client</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">sync_buffered_reasoner</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HelperInterface.SetReachableLoc"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.SetReachableLoc">[docs]</a>    <span class="k">def</span> <span class="nf">SetReachableLoc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the Choose function in order to set the reachable location by deleting the location &#39;E&#39;.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            reachable_loc(string): the list of reachable locations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># query for knowing which adiacent locations can be reached</span>
+        <span class="n">reachable_loc</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">objectprop_b2_ind</span><span class="p">(</span><span class="s2">&quot;canReach&quot;</span><span class="p">,</span> <span class="s2">&quot;Robot1&quot;</span><span class="p">)</span>
+
+        <span class="c1"># cancel the useless characters</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reachable_loc</span><span class="p">)):</span>
+            <span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="nb">len</span><span class="p">(</span><span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">32</span><span class="p">:]</span>
+
+        <span class="c1"># remove the location E from the list of the reachable, because we will go in E only if the battery goes low</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">reachable_loc</span><span class="o">.</span><span class="n">copy</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span>
+                <span class="n">reachable_loc</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">break</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;reachable locations&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">reachable_loc</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">reachable_loc</span></div>
+
+<div class="viewcode-block" id="HelperInterface.SetUrgentLoc"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.SetUrgentLoc">[docs]</a>    <span class="k">def</span> <span class="nf">SetUrgentLoc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the Choose function in order to set the urgent locations by deleting the location &#39;E&#39; and the 2 corridors.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            urgent_loc(string): the list of urgent locations</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># query for knowing urgent locations</span>
+        <span class="n">urgent_loc</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">ind_b2_class</span><span class="p">(</span><span class="s2">&quot;URGENT&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">urgent_loc</span><span class="p">)):</span>
+            <span class="n">urgent_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">urgent_loc</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="nb">len</span><span class="p">(</span><span class="n">urgent_loc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">urgent_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">urgent_loc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">32</span><span class="p">:]</span>
+
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">urgent_loc</span><span class="o">.</span><span class="n">copy</span><span class="p">():</span>
+
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;C1&quot;</span><span class="p">:</span>
+                <span class="n">urgent_loc</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;C2&quot;</span><span class="p">:</span>
+                <span class="n">urgent_loc</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">i</span> <span class="o">==</span> <span class="s2">&quot;E&quot;</span><span class="p">:</span>
+                <span class="n">urgent_loc</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+                <span class="k">continue</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;urgent locations are:&quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">urgent_loc</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">urgent_loc</span></div>
+
+<div class="viewcode-block" id="HelperInterface.SetCorridorLoc"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.SetCorridorLoc">[docs]</a>    <span class="k">def</span> <span class="nf">SetCorridorLoc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the Choose function in order to set the corridors.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            corridor_loc(string): the list of corridors</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">corridor_loc</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">ind_b2_class</span><span class="p">(</span><span class="s2">&quot;CORRIDOR&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corridor_loc</span><span class="p">)):</span>
+            <span class="n">corridor_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">corridor_loc</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="nb">len</span><span class="p">(</span><span class="n">corridor_loc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">corridor_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">corridor_loc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">32</span><span class="p">:]</span>
+
+        <span class="k">return</span> <span class="n">corridor_loc</span></div>
+
+<div class="viewcode-block" id="HelperInterface.SetRoomLoc"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.SetRoomLoc">[docs]</a>    <span class="k">def</span> <span class="nf">SetRoomLoc</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the Choose function in order to set the Rooms.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            room_loc(string): the list of rooms</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">room_loc</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">ind_b2_class</span><span class="p">(</span><span class="s2">&quot;ROOM&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">room_loc</span><span class="p">)):</span>
+            <span class="n">room_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">room_loc</span><span class="p">[</span><span class="n">i</span><span class="p">][:</span><span class="nb">len</span><span class="p">(</span><span class="n">room_loc</span><span class="p">[</span><span class="n">i</span><span class="p">])</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="n">room_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">room_loc</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">32</span><span class="p">:]</span>
+
+        <span class="k">return</span> <span class="n">room_loc</span></div>
+
+<div class="viewcode-block" id="HelperInterface.Choose"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.Choose">[docs]</a>    <span class="k">def</span> <span class="nf">Choose</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the finite state machine to choose the next location due to the reachable locations,</span>
+<span class="sd">        the urgent ones and knowing that the priority is: firstly we see</span>
+<span class="sd">        the reachable urgent locations, then the corridors and if we have</span>
+<span class="sd">        more than one possibility I choose rondomly from a list of possibilities.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            choice(string): the location chosen</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">reachable_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SetReachableLoc</span><span class="p">()</span>
+        <span class="n">urgent_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SetUrgentLoc</span><span class="p">()</span>
+        <span class="n">corridor_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SetCorridorLoc</span><span class="p">()</span>
+        <span class="n">room_loc</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">SetRoomLoc</span><span class="p">()</span>
+        <span class="n">possible_choices</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># check if among reachable locations there are some urgent ones.</span>
+        <span class="c1"># In this case the possible choices are set</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reachable_loc</span><span class="p">)):</span>
+            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">urgent_loc</span><span class="p">)):</span>
+                <span class="k">if</span> <span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">urgent_loc</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                    <span class="n">possible_choices</span> <span class="o">=</span> <span class="n">possible_choices</span> <span class="o">+</span> <span class="p">[</span><span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+        <span class="c1"># in case that in the previous check the list of possible choices</span>
+        <span class="c1"># is still empty (there are not reachable rooms among the urgent ones)</span>
+        <span class="c1"># the list of possible choices is filled by the corridors</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_choices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reachable_loc</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corridor_loc</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">corridor_loc</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                        <span class="n">possible_choices</span> <span class="o">=</span> <span class="n">possible_choices</span> <span class="o">+</span> <span class="p">[</span><span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+        <span class="c1"># in case that in the previous checks the list of possible choices</span>
+        <span class="c1"># is still empty (there are not neither reachable rooms among</span>
+        <span class="c1"># the urgent ones nor corridors among the reachable ones) the list of</span>
+        <span class="c1"># possible choices is filled by the reachable rooms (not urgent)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">possible_choices</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">reachable_loc</span><span class="p">)):</span>
+                <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">room_loc</span><span class="p">)):</span>
+                    <span class="k">if</span> <span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">==</span> <span class="n">room_loc</span><span class="p">[</span><span class="n">j</span><span class="p">]:</span>
+                        <span class="n">possible_choices</span> <span class="o">=</span> <span class="n">possible_choices</span> <span class="o">+</span> <span class="p">[</span><span class="n">reachable_loc</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;possible choices are: &quot;</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">possible_choices</span><span class="p">)</span>
+
+        <span class="c1"># choose a random location among the list of the possible choices</span>
+        <span class="n">choice</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">possible_choices</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Decision:&quot;</span> <span class="o">+</span> <span class="n">choice</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">choice</span></div>
+
+<div class="viewcode-block" id="HelperInterface.VisitLocation"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.VisitLocation">[docs]</a>    <span class="k">def</span> <span class="nf">VisitLocation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">room_chosen</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the finite state machine to visit the location chosen.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            room_chosen(string): room chosen to be visited</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">controller_client</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="HelperInterface.controller_client"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.controller_client">[docs]</a>    <span class="k">def</span> <span class="nf">controller_client</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the visit location function in order to call the controller server for simulating the random motion of the robot in a room.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            None</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">rospy</span><span class="o">.</span><span class="n">wait_for_service</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">controller</span> <span class="o">=</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceProxy</span><span class="p">(</span><span class="s1">&#39;controller&#39;</span><span class="p">,</span> <span class="n">Controller</span><span class="p">)</span>
+            <span class="n">resp1</span> <span class="o">=</span> <span class="n">controller</span><span class="p">()</span>
+            <span class="k">return</span> <span class="n">resp1</span><span class="o">.</span><span class="n">received</span>
+        <span class="k">except</span> <span class="n">rospy</span><span class="o">.</span><span class="n">ServiceException</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Service call failed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="o">%</span><span class="n">e</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="HelperInterface.CheckRobotPosition"><a class="viewcode-back" href="../../index.html#scripts.helper.HelperInterface.CheckRobotPosition">[docs]</a>    <span class="k">def</span> <span class="nf">CheckRobotPosition</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Function called by the finite state machine node in order to know in which location the robot is.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            None</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            robot_position(string): the current robot position</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">robot_position</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">objectprop_b2_ind</span><span class="p">(</span><span class="s2">&quot;isIn&quot;</span><span class="p">,</span> <span class="s2">&quot;Robot1&quot;</span><span class="p">)</span>
+
+        <span class="n">robot_position</span> <span class="o">=</span> <span class="n">robot_position</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">robot_position</span> <span class="o">=</span> <span class="n">robot_position</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">robot_position</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+        <span class="n">robot_position</span> <span class="o">=</span> <span class="n">robot_position</span><span class="p">[</span><span class="mi">32</span><span class="p">:]</span>
+
+        <span class="k">return</span> <span class="n">robot_position</span></div></div>
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2022, Daniele Parisi.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>
