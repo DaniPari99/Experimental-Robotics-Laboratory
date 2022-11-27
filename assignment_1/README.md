@@ -138,7 +138,7 @@ Because of the urgency threshold is set to the default value of 7 seconds and th
 
 ## Authors and contacts
 
-[Parisi Daniele Martino](https://github.com/DaniPari99)
+[Parisi Daniele Martino](https://github.com/DaniPari99) (4670964)
 
 s4670964@studenti.unige.it
 
