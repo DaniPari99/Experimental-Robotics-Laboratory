@@ -52,6 +52,25 @@ You need to have aRMOR package cloned in your SRC folder of you workspace, if yo
 
 [aRMOR installation](https://github.com/EmaroLab/armor/issues/7)
 
+Now you need to modify the armor_api folder by adding in the ```armor_manipulation_client``` node the following function:
+
+```
+def disj_all_inds(self,ind_list):
+        try:
+            res = self._client.call('DISJOINT', 'IND', '', ind_list)
+
+        except rospy.ServiceException as e:
+            raise ArmorServiceCallError("Service call failed upon adding individual {0} to class {1}: {2}".format(ind_name, class_name, e))
+
+        except rospy.ROSException:
+            raise ArmorServiceCallError("Cannot reach ARMOR client: Timeout Expired. Check if ARMOR is running.")
+
+        if res.success:
+            return res.is_consistent
+        else:
+            raise ArmorServiceInternalError(res.error_description, res.exit_code)
+```
+
 Now run the launch file just typing on the terminal:
 ```
 roslaunch assignment_1 assignment_1.launch
