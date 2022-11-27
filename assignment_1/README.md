@@ -17,7 +17,7 @@ The following figure shows the software architecture of the assignment:
 
 As we can see we have 4 nodes, but there is a fifth one: the ```helper```, which is not shown, because it is simply an helper interface usefull for the ```assignment_fsm``` node.
 * **assignment_fsm:** is the node which implements the Finite State Machine which drives the robot through the locations of the map according to the stimuli. It uses external functions provided by the ```helper.py``` node.
-* **battery_state:** is the node which simulates the battery behaviour. The battery is recharged and run out infinitely. This state publishes on the topic ```/state/battery_low``` the state of the battery: it is a boolean which is **True** if the battery is low and **False** otherwise.
+* **battery_state:** is the node which simulates the battery behaviour. The battery is recharged and run out in a random time belonging to the range [15, 40]. This node publishes on the topic ```/state/battery_low``` the state of the battery: it is a boolean which is **True** if the battery is low and **False** otherwise.
 * **controller:** is the server node which simulates the random motion of the robot while it is visiting a location. It only wastes time waiting for doing something smarter in the future improvements.
 * **armor:** is a server already implemented which is used by the ```assignment_fsm``` through the ```helper``` node for doing manipulations or queries on the ontology.
 
@@ -26,7 +26,7 @@ For sake of completeness the following figure shows the temporal diagram of the 
 
 ![Diagramma senza titolo drawio-5](https://user-images.githubusercontent.com/62515616/202917399-4889196b-1a46-4285-86f9-b455e57d0221.png)
 
-The diagram shows that the ```battery_state``` is always in contact with the ```assignment_fsm``` node through a pub/sub approach, indeed the it makes the system going back to the ```assignment_fsm``` immediately in order to mmake the robot recharging.
+The diagram shows that the ```battery_state``` is always in contact with the ```assignment_fsm``` node through a pub/sub approach, indeed it makes the system going back to the ```assignment_fsm``` immediately in order to make the robot recharging.
 The other software componensts, which are servers, are always active, but they work only if the ```assignment_fsm``` sends a request to them.
 
 ## States diagram
@@ -35,7 +35,7 @@ The following figure shows the states diagram of the Finite State Machine:
 ![Diagramma senza titolo drawio-2-3](https://user-images.githubusercontent.com/62515616/202918060-40c54de6-60bf-485f-a580-f060d253ae70.png)
 
 As we can see we have 4 states:
-* ```WAIT```: this state is just executed at the beginning and it waits the map ontology to be loaded. As soon as the ontology is loaded, the transition **loaded** is trigguered.
+* ```WAIT```: this state is just executed at the beginning and it waits until the ontology map to be loaded. As soon as the ontology is loaded, the transition **loaded** is trigguered.
 * ```SLEEP```: this state is executed in order to recharge the battery of the robot. As soon as the battery goes high, the transition **rested** is trigguered.
 * ```DECIDE```: this state is executed in order to decide the next location to be visited. As soon as the next location is chosen, the transition **decided** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
 * ```VISIT```: this state is executed in order to visit the chosen location. As soon as the chosen location is visited, the transition **visited** is trigguered, instead if the battery goes low, the transition **tired** is trigguered.
@@ -44,12 +44,6 @@ For sake of completeness and robustness I also implemented the so called transit
 
 ## Installation and running
 
-### With roslaunch
-In order to run the application with the a launch file we need to install ```x-term``` with the following steps:
-```
-sudo apt-get update
-sudo apt-get -y install xterm
-```
 You need to have aRMOR package cloned in your SRC folder of you workspace, if youy don't have follow the steps in the following link:
 
 [aRMOR installation](https://github.com/EmaroLab/armor/issues/7)
@@ -73,6 +67,12 @@ def disj_all_inds(self,ind_list):
             raise ArmorServiceInternalError(res.error_description, res.exit_code)
 ```
 
+### With roslaunch
+In order to run the application with a launch file you need to install ```x-term``` with the following steps:
+```
+sudo apt-get update
+sudo apt-get -y install xterm
+```
 Finally you can run the launch file just typing on the terminal:
 ```
 roslaunch assignment_1 assignment_1.launch
