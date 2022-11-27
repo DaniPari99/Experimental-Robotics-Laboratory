@@ -50,7 +50,7 @@ sudo apt-get -y install xterm
 ```
 You need to have aRMOR package cloned in your SRC folder of you workspace, if youy don't have follow the steps in the following link:
 
-[Click me to go to Google!](https://github.com/EmaroLab/armor/issues/7)
+[aRMOR installation](https://github.com/EmaroLab/armor/issues/7)
 
 Now run the launch file just typing on the terminal:
 ```
