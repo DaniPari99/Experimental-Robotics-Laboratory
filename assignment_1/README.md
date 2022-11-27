@@ -136,5 +136,9 @@ Because of the urgency threshold is set to the default value of 7 seconds and th
 
 * The third limitation can be solved by increasing the urgency threshold.
 
+## Authors and contacts
+
+Parisi Daniele Martino
+
 
 
