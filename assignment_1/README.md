@@ -4,7 +4,7 @@
 
 Parisi Daniele Martino 4670964
 
-[code documentation](https://github.com/EmaroLab/armor/issues/7)
+[code documentation](https://danipari99.github.io/Experimental-Robotics-Laboratory/)
 
 The assignment involves a robot deployed in a indoor environment for surveillance purposes. The robot’s objective is to visit the different locations and stay there for some times.
 
