@@ -71,7 +71,7 @@ def disj_all_inds(self,ind_list):
             raise ArmorServiceInternalError(res.error_description, res.exit_code)
 ```
 
-Now run the launch file just typing on the terminal:
+Finally you can run the launch file just typing on the terminal:
 ```
 roslaunch assignment_1 assignment_1.launch
 ```
