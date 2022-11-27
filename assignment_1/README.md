@@ -25,7 +25,7 @@ For sake of completeness the following figure shows the temporal diagram of the 
 ![Diagramma senza titolo drawio-5](https://user-images.githubusercontent.com/62515616/202917399-4889196b-1a46-4285-86f9-b455e57d0221.png)
 
 The diagram shows that the ```battery_state``` is always in contact with the ```assignment_fsm``` node through a pub/sub approach, indeed the it makes the system going back to the ```assignment_fsm``` immediately in order to mmake the robot recharging.
-The other software componensts, which are servers, are always active, but they work only if the ```assignment_fsm``` send a request to them.
+The other software componensts, which are servers, are always active, but they work only if the ```assignment_fsm``` sends a request to them.
 
 ## States diagram
 The following figure shows the states diagram of the Finite State Machine:
