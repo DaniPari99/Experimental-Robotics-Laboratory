@@ -44,7 +44,7 @@ For sake of completeness and robustness I also implemented the so called transit
 
 ## Installation and running
 
-You need to have aRMOR package cloned in the SRC folder of your workspace, if youy don't have follow the steps in the following link:
+You need to have aRMOR package cloned in the SRC folder of your workspace, if you don't have follow the steps in the following link:
 
 [aRMOR installation](https://github.com/EmaroLab/armor/issues/7)
 
