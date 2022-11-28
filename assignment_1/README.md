@@ -66,6 +66,8 @@ def disj_all_inds(self,ind_list):
         else:
             raise ArmorServiceInternalError(res.error_description, res.exit_code)
 ```
+Where ```ind_list``` is the list of all individuals of the ontology.
+I did this modify because I faced many problems with the pre-existed function ```disj_inds_of_class(self, class_name)``` of ```armor_manipulation_client.py```.
 
 ### Running with roslaunch
 In order to run the application with a launch file you need to install ```x-term``` with the following steps:
